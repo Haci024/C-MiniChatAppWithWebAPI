@@ -6,6 +6,7 @@ namespace C_ChatApplication.Entities
 	{
 
 		public string Id { get; set; }
+
 		public string FullName { get; set; }
 
 		
@@ -13,5 +14,11 @@ namespace C_ChatApplication.Entities
 
 		
 		public ICollection<Message> ReceiverMessageList { get; set; }
+
+		public AppUser()
+		{
+			Id = Guid.NewGuid().ToString(); 
+		}
 	}
+
 }

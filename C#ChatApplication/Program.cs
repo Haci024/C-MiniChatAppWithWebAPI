@@ -1,14 +1,20 @@
-﻿using C_ChatApplication.Connection;
+﻿using AutoMapper.Internal.Mappers;
+using C_ChatApplication.AutoMapper;
+using C_ChatApplication.Connection;
 using C_ChatApplication.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>();
+
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
@@ -17,7 +23,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 
 
-}).AddEntityFrameworkStores<AppDbContext>();
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
