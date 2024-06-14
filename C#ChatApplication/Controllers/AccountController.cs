@@ -46,7 +46,7 @@ public class AccountController : ControllerBase
 			}
 		}
 			var result = await _userManager.CreateAsync(_mapper.Map<AppUser>(dto), dto.Password);
-
+		    var role = await _userManager.AddToRoleAsync(_mapper.Map<AppUser>(dto), "User");
 			if (result.Succeeded)
 			{
 				return Ok("Registration successful");
@@ -58,7 +58,7 @@ public class AccountController : ControllerBase
 					return Ok(item.Description);
 				}		
 			}	
-		return Ok("Registration successful");
+		return Ok($"Registration successfully");
 	}
 	[HttpPost("login")]
 	public async Task<IActionResult> Login( LoginDTO dto)
@@ -85,16 +85,16 @@ public class AccountController : ControllerBase
 	{
 		int keyLength = 32;
 
-		// Anahtar dizisi oluştur
+		
 		byte[] keys = new byte[keyLength];
 
-		// RNGCryptoServiceProvider kullanarak rastgele anahtar oluştur
-		using (var rng = new RNGCryptoServiceProvider())
+	
+		using (RNGCryptoServiceProvider rng = new())
 		{
 			rng.GetBytes(keys);
 		}
 
-		// Anahtarı string olarak kodla (Base64)
+		
 		string base64Key = Convert.ToBase64String(keys);
 
 		var tokenHandler = new JwtSecurityTokenHandler();
@@ -108,7 +108,7 @@ public class AccountController : ControllerBase
 					new Claim(ClaimTypes.Email, user.Email)
 			
 			}),
-			Expires = DateTime.UtcNow.AddSeconds(3),
+			Expires = DateTime.UtcNow.AddMinutes(3),
 			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 		};
 

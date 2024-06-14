@@ -1,0 +1,38 @@
+﻿@model UI.DTO.RegisterDTO
+@{
+    ViewData["Title"] = "Login";
+
+}
+
+<div class="login-container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="text-center mb-4">Qeydiyyat</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="username">FullName</label>
+                    <input type="text" id="username" asp-for="FullName" name="FullName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="username">UserName</label>
+                    <input type="text" id="username" asp-for="UserName" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="email" id="username" asp-for="Email" name="Email" class="form-control">
+                </div>
+               
+                <div class="form-group">
+                    <label for="username">Password</label>
+                    <input type="password" id="username" asp-for="Password" name="Password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">ConfirmPassword</label>
+                    <input type="password" id="password" asp-for="ConfirmPassword" name="ConfirmPassword" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+            </form>
+        </div>
+    </div>
+
+</div>
